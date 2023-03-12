@@ -1,0 +1,26 @@
+
+@import './variable';
+//Khai báo hàm
+@mixin text($fz: $text-base, $fw: $fw-regular, $c: $c0-dark) {
+    font-size: $fz ;
+    font-weight: $fw;
+    color: $c;
+}
+
+@mixin button($bg, $pd, $bd, $br, $fz, $fw, $c, $bg-hover, $c-hover) {
+    background: $bg;
+    padding: $pd;
+    border: $bd;
+    border-radius: $br;
+    // font-size:$fz;
+    // font-weight: $fw;
+    // color: $c;
+    @include text($fz, $fw , $c);
+    transition: .5s;
+    cursor: pointer;
+
+    &:hover {
+        background: $bg-hover;
+        color: $c-hover;
+    }
+}

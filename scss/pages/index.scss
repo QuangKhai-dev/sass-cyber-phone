@@ -1,0 +1,279 @@
+@import '../themes/variable';
+@import '../themes/mixin';
+@import '../base/base';
+
+
+//nesting css
+.header {
+    background-color: #f5f9fe;
+
+    @media only screen and (max-width: 1200px) {
+        background-color: $bg0-primary;
+
+    }
+
+    @media only screen and (max-width: 768px) {
+        // background-color: $bg0-danger;
+        position: relative;
+
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+
+        .btn-menu {
+            display: none;
+            cursor: pointer;
+            padding: 15px;
+            border: 0;
+            background-color: $bg0-primary;
+            border-radius: 5px;
+
+            i::before {
+                color: #fff;
+            }
+            @media only screen and (max-width: 768px) {
+                display: block;
+        
+            }
+
+        }
+
+        .nav-bar {
+            @media only screen and (max-width: 768px) {
+                position: absolute;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                top:80px;
+                background-color: $bg0-light;
+            }
+
+            a {
+                @media only screen and (max-width: 768px) {
+                    display: block;
+                    padding: $p-1;
+                    width: 100%;
+                    text-align: center;
+                    position: relative;
+                    
+                }
+                @include text();
+                text-decoration: none;
+                margin-left: 15px;
+                position: relative;
+                &::after {
+                    position: absolute;
+                    content: "";
+                    width: 100%;
+                    height: 3px;
+                    background-color: $bg0-primary;
+                    bottom: -5px;
+                    left: 0;
+                    transform: scale(0, 1);
+                    transition: transform 0.3s;
+                }
+
+                &:hover {
+                    color: $c0-primary;
+
+                    &::after {
+                        transform: scale(1, 1);
+                    }
+                }
+            }
+        }
+
+        .logo {
+            a {
+                // color: $c0-primary;
+                // font-size: $text-3xl;
+                // font-weight: $fw-semibold;
+                @include text($text-3xl, $fw-semibold, $c0-primary);
+                text-decoration: none;
+            }
+        }
+
+
+    }
+}
+
+
+.carousel {
+    height: 800px;
+    background: url('../image/product-header-bg.jpg');
+    background-size: cover;
+    background-position: right bottom;
+    -webkit-box-shadow: 1px -9px 15px -5px rgba(200, 232, 236, 0.59);
+    box-shadow: 1px -9px 15px -5px rgba(217, 241, 244, 0.59);
+
+    .container {
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .detail {
+            h1 {
+                font-size: $text-6xl;
+                font-weight: $fw-bold;
+                color: $c0-primary;
+            }
+
+            h3 {
+                font-size: $text-2xl;
+                font-weight: $fw-semibold;
+                color: $c0-dark;
+            }
+
+            p {
+                font-size: $text-base;
+                font-weight: $fw-light;
+                color: $c0-dark;
+            }
+
+            .btn-info {
+
+                box-shadow: 0 3px 6px #c9d8f4;
+                transition: .5s;
+                margin-top: 15px;
+                @include button($bg-transparent, 13.5px 44px, 2px solid $bd-c0-primary , 8px, $text-base, $fw-semibold , $c0-primary, $bg0-primary, $c0-light);
+            }
+
+            .btn-shop {
+
+
+                transition: .5s;
+                opacity: 0.8;
+                @include button(linear-gradient(120deg, #60a4f4, #2a73dd), 15.5px 46px, none, 8px, 14px, 600, #fff, linear-gradient(120deg, #60a4f4, #2a73dd), $c0-primary);
+
+            }
+        }
+
+        .thumbnail {
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+
+.featured-products {
+    .container {
+        .title {
+            padding-top: $p-3;
+            text-align: center;
+            @include text($text-3xl, $fw-semibold , $c0-dark );
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+
+            .col {
+
+                width: calc(100%/3);
+                overflow-y: hidden;
+
+                @for $i from 1 to 7 {
+                    .item-#{$i} {
+                        animation: fade-down;
+                        animation-duration: #{$i*0.5}s;
+                    }
+                }
+
+                @media only screen and (max-width: 768px) {
+                    width: 100%;
+                }
+
+                .card {
+                    margin: 15px;
+                    padding: $p-2;
+                    box-shadow: 6px 6px 12px #e2ebfc, -6px -6px 12px #fff;
+
+
+                    img {
+                        width: 100%;
+
+                    }
+
+                    .card-body {
+                        .product-name-price {
+                            display: flex;
+                            justify-content: space-between;
+
+                            .name {
+                                @include text($text-2xl, $fw-semibold , $c0-dark);
+                            }
+
+                            .price {
+                                @include text($text-xl, $fw-semibold , $c0-dark);
+                            }
+                        }
+
+                        .product-description {
+                            i {}
+                        }
+
+                        .rating-button {
+                            margin-top: 15px;
+                            display: flex;
+                            justify-content: space-between;
+
+                            .rating {
+                                i {
+                                    color: $c0-warning;
+                                }
+                            }
+
+                            .btn-buy {
+                                // box-shadow: 6px 6px 12px #e2ebfc, -6px -6px 12px #fff;
+                                // // $bg, $pd, $bd, $br, $fz, $fw, $c, $bg-hover, $c-hover
+                                // @include button($bg0-light, $p-1 $p-2, none,5px, $text-base,$fw-semibold ,$c0-primary , $bg0-light , $c0-primary );
+
+                                @extend .btn-danger;
+
+                                &:hover {
+                                    box-shadow: 6px 6px 12px #a3a4a7, -6px -6px 12px rgb(197, 195, 195);
+                                }
+
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+@keyframes fade-down {
+    from {
+        transform: translateY(-200px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+}
+
+
+// @media screen {
+//     //css
+//     .header{ 
+
+//     }
+//     .footer {
+
+//     }
+// }
